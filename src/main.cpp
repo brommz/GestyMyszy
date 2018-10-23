@@ -1,20 +1,36 @@
-#include <QtGui/QApplication>
-#include "mainwindow.h"
 #include <iostream>
-#include "SiecNeuronowa/SiecDwuwarstwowa.h"
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+#include<fstream>
 
-int main(int argc, char *argv[])
+#include "SiecDwuwarstwowa.h"
+
+using namespace std;
+
+int main()
 {
-    try
-    {
-        QApplication a(argc, argv);
-        MainWindow w;
-        w.show();
-        return a.exec();
-    }
-    catch(...)
-    {
-        std::cout << "ERROR\n";
-    }
+try
+{
+    SiecDwuwarstwowa siec(40, 10, 10);
+    siec.otworzSiec("SIEC.net");
+
+    std::vector<real> test;
+    for(uint i=0; i<40;i++)
+        test.push_back(0.4);
+
+    std::cout << "00works\n";
+    std::cout << siec.Oblicz(test) << "\n";
+}
+catch(Exception& e)
+{
+        std::cout << "ERROR: " << e.what() << "\n";
+}
+catch(...)
+{
+        std::cout << "Dziwny blad";
+}
+
     return 0;
 }
